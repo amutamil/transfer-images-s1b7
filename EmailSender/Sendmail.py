@@ -1,8 +1,8 @@
 import smtplib 
 
-senderMailId = "prajju1998gaargesh@gmail.com"
+senderMailId = ""
 senderMailpassword = ""
-receiverMailId = "prajwalgaargesh@gmail.com"
+receiverMailId = ""
 Subject = "New Image Alert!"
 
 def sendMail(msg):

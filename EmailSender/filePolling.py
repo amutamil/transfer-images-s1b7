@@ -12,12 +12,11 @@ if __name__ == "__main__":
 
 def on_created(event):
     msg = f"{event.src_path} has been Generated.\n Please Have a look!!"
-    print(f"hey, {event.src_path} has been created!")
     Sendmail.sendMail(msg)
 
 my_event_handler.on_created = on_created
 
-path = "."  #current folder
+path = "..\Receiver"  #Receiver folder
 go_recursively = True
 my_observer = Observer()
 my_observer.schedule(my_event_handler, path, recursive=go_recursively)
