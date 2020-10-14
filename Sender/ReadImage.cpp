@@ -11,12 +11,12 @@ SAMP_BOOLEAN ReadImage::read(STORAGE_OPTIONS* A_options, int A_appID, InstanceNo
 	FORMAT_ENUM             format = UNKNOWN_FORMAT;
 	SAMP_BOOLEAN            sampBool = SAMP_FALSE;
 	MC_STATUS               mcStatus;
-	ReadMessageFromFile*	rmff;
+	ReadMessageFromFile*	rmff = nullptr;
 
 	format = IMPLICIT_LITTLE_ENDIAN_FORMAT;
 
 	A_node->mediaFormat = SAMP_FALSE;
-	sampBool = rmff->readFromFile(A_options, A_node->fname, format, &A_node->msgID, &A_node->transferSyntax, &A_node->imageBytes);
+	sampBool = ReadMessageFromFile::readFromFile(A_options, A_node->fname, format, &A_node->msgID, &A_node->transferSyntax, &A_node->imageBytes);
 
 
 	if (sampBool == SAMP_TRUE)

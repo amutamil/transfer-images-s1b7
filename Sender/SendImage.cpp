@@ -14,7 +14,6 @@ void sendMessage(int A_associationID, InstanceNode* node);
 
 SAMP_BOOLEAN SendImage::send(STORAGE_OPTIONS* A_options, int A_associationID, InstanceNode* A_node)
 {
-	MC_STATUS           mcStatus;
 	returnFlag		  = SAMP_FALSE;
 	A_node->imageSent = SAMP_FALSE;
 

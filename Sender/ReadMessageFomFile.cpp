@@ -20,6 +20,7 @@ void openFile(CBinfo* A_cbinfo, char* A_filename, int* A_msgID);
 void setIOBuffer(CBinfo* A_cbinfo);
 void setBufferLength(CBinfo* A_cbinfo);
 void allocateMemoryToBuffer(CBinfo* A_cbinfo);
+void openEmptyMessage(int* A_msgID);
 void closeFile(CBinfo* A_cbinfo);
 void freeBuffer(CBinfo* A_cbinfo);
 //****************************************************************************************************************************

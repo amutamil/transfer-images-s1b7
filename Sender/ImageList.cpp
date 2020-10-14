@@ -1,4 +1,11 @@
+
+#include "general_util.h"
 #include "ImageList.h"
+
+//****************************************************************************************************************************
+bool hasSentImageRecievedResponse(InstanceNode* A_node);
+InstanceNode* goToLastNode(InstanceNode* A_node);
+//****************************************************************************************************************************
 
 SAMP_BOOLEAN ImageList::AddFileToList(InstanceNode** A_list, char* A_fname)
 {
@@ -8,7 +15,7 @@ SAMP_BOOLEAN ImageList::AddFileToList(InstanceNode** A_list, char* A_fname)
 	newNode = static_cast<InstanceNode*>(malloc(sizeof(InstanceNode)));
 	if (!newNode)
 	{
-		//PrintError("Unable to allocate object to store instance information", MC_NORMAL_COMPLETION);
+		PrintError("Unable to allocate object to store instance information", MC_NORMAL_COMPLETION);
 		return (SAMP_FALSE);
 	}
 
@@ -36,10 +43,11 @@ SAMP_BOOLEAN ImageList::AddFileToList(InstanceNode** A_list, char* A_fname)
 		/*
 		 * Add to the tail of the list
 		 */
-		listNode = *A_list;
-
-		while (listNode->Next)
-			listNode = listNode->Next;
+		//listNode = *A_list;
+		listNode = goToLastNode(*A_list);
+		//goToLastNode(listNode);
+		//while (listNode->Next)
+		//	listNode = listNode->Next;
 
 		listNode->Next = newNode;
 	}
@@ -111,7 +119,7 @@ int ImageList::GetNumOutstandingRequests(InstanceNode* A_list)
 	node = A_list;
 	while (node)
 	{
-		if ((node->imageSent == SAMP_TRUE) && (node->responseReceived == SAMP_FALSE))
+		if (hasSentImageRecievedResponse(node))
 			outstandingResponseMsgs++;
 
 		node = node->Next;
@@ -119,5 +127,16 @@ int ImageList::GetNumOutstandingRequests(InstanceNode* A_list)
 	return outstandingResponseMsgs;
 }
 
+//****************************************************************************************************************************
+bool hasSentImageRecievedResponse(InstanceNode* A_node)
+{
+	return (A_node->imageSent == SAMP_TRUE) && (A_node->responseReceived == SAMP_FALSE);
+}
 
+InstanceNode* goToLastNode(InstanceNode* A_node)
+{
+	while (A_node->Next)
+		A_node = A_node->Next;
 
+	return A_node;
+}
