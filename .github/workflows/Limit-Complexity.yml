@@ -23,4 +23,4 @@ jobs:
       run: pip install lizard
 
     - name: Limit complexity
-      run: $HOME/.local/bin/lizard --CCN 3 -x"SenderTest/catch.hpp" -x"mc3inc/*"
+      run: $HOME/.local/bin/lizard --CCN 3 -x"./SenderTest/catch.hpp" -x"./mc3inc/*"
