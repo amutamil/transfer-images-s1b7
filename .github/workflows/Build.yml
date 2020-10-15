@@ -48,7 +48,7 @@ jobs:
       run: move senderTestApp.exe mc3lib
     
     - name: cd into mc3lib to run sender
-    - run: cd mc3lib && ./senderTestApp.exe 
+      run: cd mc3lib && ./senderTestApp.exe 
 
     - name: move .gcda files to sender test dir
       run:  move *.gcda SenderTest
