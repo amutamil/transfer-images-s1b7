@@ -30,7 +30,7 @@ jobs:
     #   run: cd mc3lib && ./sender.exe MERGE_STORE_SCP -p 6767 
    
     - name: build senderTestApplication
-      run: g++ SenderTest\ImageList.cpp -I mc3inc -L mc3lib -l jansson -l libxml2 -l mc3adll64 -l mc3adll64d -l mc3adv64 -l picxm --coverage -o senderTestApp
+      run: g++ SenderTest\ImageListTest.cpp -I mc3inc -L mc3lib -l jansson -l libxml2 -l mc3adll64 -l mc3adll64d -l mc3adv64 -l picxm --coverage -o senderTestApp
    
     - name: move gcno to sender test dir
       run: move *.gcno SenderTest 
