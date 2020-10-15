@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "general_util.h"
 #include <iostream>
 #include <utility>
@@ -27,7 +28,7 @@ void setStopImageNumber(int* argc, char* argv[], STORAGE_OPTIONS* options, SAMP_
 void waitForResponse(int associationID, int timeout, int* responseMsgID, char* responseService, MC_COMMAND* responseCmd);
 void getDicomMsgID(int responseMsgID, unsigned int* dicomMsgID);
 void getAffectedSopInstance(int* responseMsgID, char* affectedSopID, int bufferSize);
-bool isNodeWithAffectedSopInstanceID(InstanceNode* node, int dicomMsgID, char* affectedSOPinstance);
+bool isNodeWithAffectedSopInstanceID(InstanceNode** node, int dicomMsgID, char* affectedSOPinstance);
 void freeMessageIfNodeIsNull(InstanceNode* node, int* responseMsgID, unsigned int* dicomMsgID);
 void freeMessage(int responseMsgID);
 
@@ -95,18 +96,18 @@ SAMP_BOOLEAN ReadResponseMessages(STORAGE_OPTIONS*  A_options, int A_association
 	getAffectedSopInstance(&responseMessageID, affectedSOPinstance, sizeof(affectedSOPinstance));
 	
 	node = *A_list;
-	while (isNodeWithAffectedSopInstanceID(node, dicomMsgID, affectedSOPinstance));
+	while (isNodeWithAffectedSopInstanceID(&node, dicomMsgID, affectedSOPinstance));
+
 	freeMessageIfNodeIsNull(node, &responseMessageID, &dicomMsgID);
 
 
-	node->responseReceived = SAMP_TRUE;
-
-	sampBool = CheckResponseMessage(responseMessageID, &node->status, node->statusMeaning, sizeof(node->statusMeaning));
-	if (!sampBool)
-	{
-		node->failedResponse = SAMP_TRUE;
-	}
-	node->failedResponse = SAMP_FALSE;
+	sampBool = CheckResponseMessage(responseMessageID, &node->status, node->statusMeaning, sizeof(node->statusMeaning), node);
+	
+//if (!sampBool)
+//{
+//	node->failedResponse = SAMP_TRUE;
+//}
+//node->failedResponse = SAMP_FALSE;
 
 	freeMessage(responseMessageID);
 
@@ -114,18 +115,25 @@ SAMP_BOOLEAN ReadResponseMessages(STORAGE_OPTIONS*  A_options, int A_association
 	return returnValue;
 }
 
-SAMP_BOOLEAN CheckResponseMessage(int A_responseMsgID, unsigned int* A_status, char* A_statusMeaning, size_t A_statusMeaningLength)
+SAMP_BOOLEAN CheckResponseMessage(int A_responseMsgID, unsigned int* A_status, char* A_statusMeaning, size_t A_statusMeaningLength, InstanceNode* node)
 {
 	SAMP_BOOLEAN returnBool = SAMP_TRUE;
+	if (!returnFlag)
+	{
 
-	returnBool = getResponseMessageStatus(A_responseMsgID, A_status, A_statusMeaning, A_statusMeaningLength);
+		returnBool = getResponseMessageStatus(A_responseMsgID, A_status, A_statusMeaning, A_statusMeaningLength);
+
+		/* MC_Get_Value_To_UInt worked.  Check the response status */
+		mapResponseStatusToGetMeaning(A_statusMeaning, A_statusMeaningLength, A_status, &returnBool);
+
+		fflush(stdout);
+		if (!returnBool)
+		{
+			node->failedResponse = SAMP_TRUE;
+		}
+		node->failedResponse = SAMP_FALSE;
+	}
 	
-
-	/* MC_Get_Value_To_UInt worked.  Check the response status */
-	mapResponseStatusToGetMeaning(A_statusMeaning, A_statusMeaningLength, A_status, &returnBool);
-	
-	fflush(stdout);
-
 	return returnBool;
 }
 
@@ -280,18 +288,18 @@ void getAffectedSopInstance(int* responseMsgID, char* affectedSopID, int bufferS
 	}
 }
 
-bool isNodeWithAffectedSopInstanceID(InstanceNode* node, int dicomMsgID, char* affectedSOPinstance)
+bool isNodeWithAffectedSopInstanceID(InstanceNode** node, int dicomMsgID, char* affectedSOPinstance)
 {
 	
-	if (node->dicomMsgID == dicomMsgID)
+	if ((*node)->dicomMsgID == dicomMsgID)
 	{
-		if (!strcmp(affectedSOPinstance, node->SOPInstanceUID))
+		if (!strcmp(affectedSOPinstance, (*node)->SOPInstanceUID))
 		{
 			return false;
 		}
 	}
-	node = node->Next;
-	return true;
+	*node = (*node)->Next;
+	return ((*node) != NULL);
 	
 }
 
@@ -307,6 +315,7 @@ void freeMessageIfNodeIsNull(InstanceNode* node, int* responseMsgID, unsigned in
 			returnFlag = (SAMP_TRUE);
 			returnFlag = SAMP_TRUE;
 		}
+		node->responseReceived = SAMP_TRUE;
 	}
 }
 
