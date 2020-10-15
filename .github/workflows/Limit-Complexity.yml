@@ -1,4 +1,4 @@
-name: Limit complexity
+name: Limit complexity and Static Analysis
 
 on:
   push:
