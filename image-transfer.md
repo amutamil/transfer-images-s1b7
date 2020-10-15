@@ -5,7 +5,7 @@
 - It takes in as args __service and command name__ which can be viewed by using -l flag and __number of images__ to be generated.
 
 - The generated file will have an extension of __*.00x*__ which should be renamed to __*.img*__ 
-for stor_scu application.
+for Sender application.
 
 - Mc3File folder has the mc3file.exe and the required dll's and lib files.
 
