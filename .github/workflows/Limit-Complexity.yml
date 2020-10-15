@@ -8,10 +8,16 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
+      
+    - name: install cppcheck static analysis
+      run: sudo apt-get update && sudo apt-get install -y cppcheck
+
+    - name: Static Analysis on Sender Folder files
+    - run: cppcheck Sender/*.cpp
 
     - name: Install lizard
       run: pip install lizard
