@@ -1,3 +1,4 @@
+#pragma warning(disable:4996)
 #include "util_structures.h"
 #include "general_util.h"
 #include "ImageList.h"
@@ -108,7 +109,7 @@ int main(int argc, char* argv[])
 		PrintStatus("MC_Free_Message failed for request message", mcStatus != MC_NORMAL_COMPLETION);
 
 
-		sampBool = ReadResponseMessages(&options, associationID, 0, &instanceList, NULL);
+		sampBool = ReadResponseMessages(&options, associationID, 1, &instanceList, NULL);
 		sprintf(statusMsg, "Failure in reading response message, aborting association.");
 		abortAndReleaseApplicationOnFailure(statusMsg, !sampBool, &associationID, &applicationID);
 

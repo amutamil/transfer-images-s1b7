@@ -2,7 +2,7 @@
 
 #include "catch.hpp"
 #include "../Sender/ImageList.cpp"
-
+#include "../Sender/general_util.cpp"
 
 TEST_CASE("AddFiletoList when called on an empty list then returns true on succesfull allocation of memory")
 {

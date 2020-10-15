@@ -1,4 +1,5 @@
-#include "pch.h"
+#pragma warning(disable:4996)
+
 #include "general_util.h"
 #include <iostream>
 #include <utility>
@@ -38,7 +39,7 @@ void mapResponseStatusToGetMeaning(char* statusMeaning, size_t statusMeaningLeng
 //********************************************************************************************************************************
 
 
-void PrintError(std::string A_string, typename MC_STATUS A_status)
+void PrintError(std::string A_string, MC_STATUS A_status)
 {
 	std::string prefix = "                              ";
 	/*

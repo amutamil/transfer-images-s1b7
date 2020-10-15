@@ -1,6 +1,6 @@
 #pragma once
 
-#include "util_tructures.h"
+#include "util_structures.h"
 
 class ImageList
 {

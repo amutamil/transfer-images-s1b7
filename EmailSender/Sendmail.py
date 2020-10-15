@@ -1,9 +1,9 @@
 import smtplib 
 
-senderMailId = ""
+senderMailId = ""  
 senderMailpassword = ""
 receiverMailId = ""
-Subject = "New Image Alert!"
+Subject = "New Image Alert!"    # Mail Subject
 
 def sendMail(msg):
     email = smtplib.SMTP('smtp.gmail.com', 587) 
