@@ -20,5 +20,8 @@ jobs:
 
     - uses: actions/checkout@v2
     
+    - name : set merge.ini
+      run : set MERGE.INI = .\Receiver\merge.ini
+    
     - name : run stor_scp.exe
       run : .\Receiver\stor_scp.exe
