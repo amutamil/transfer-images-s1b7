@@ -68,7 +68,7 @@
     SERVICE_LIST    = Storage_SCU_Service_List
 
 [MERGE_STORE_SCU]
-    PORT_NUMBER     = 1115       # port 104 is the standard DICOM port and is
+    PORT_NUMBER     = 104       # port 104 is the standard DICOM port and is
 #                                      privileged.  This example has a
 #                                      different port to prevent conflicts when
 #                                      testing both applications on the same
