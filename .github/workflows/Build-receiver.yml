@@ -1,4 +1,4 @@
-name: Build and Run
+name: Build and Run receiver
 
 on:
 
@@ -19,9 +19,11 @@ jobs:
     steps:
 
     - uses: actions/checkout@v2
-
-    - name: build Sender(MedicalDevice)
-      run: g++ Sender\*.cpp -I mc3inc -L mc3lib -l jansson -l libxml2 -l mc3adll64 -l mc3adll64d -l mc3adv64 -l picxm -o sender
+    
+    - name : run sender.exe
+    - run : .\MC#File\imgt.exe MERGE_STORE_SCP 1 2
+    #- name: build Sender(MedicalDevice)
+    # run: g++ Sender\*.cpp -I mc3inc -L mc3lib -l jansson -l libxml2 -l mc3adll64 -l mc3adll64d -l mc3adv64 -l picxm -o sender
   
     # - name: run receiver locally
     #   run: cd Receiver && ./stor_scp.exe -p 6767 -s
@@ -29,8 +31,8 @@ jobs:
     # - name: run Sender locally
     #   run: cd mc3lib && ./sender.exe MERGE_STORE_SCP -p 6767 
    
-    - name: build senderTestApplication
-      run: g++ SenderTest\ImageListTest.cpp -I mc3inc -L mc3lib -l jansson -l libxml2 -l mc3adll64 -l mc3adll64d -l mc3adv64 -l picxm --coverage -o senderTestApp
+    #- name: build senderTestApplication
+    #  run: g++ SenderTest\ImageListTest.cpp -I mc3inc -L mc3lib -l jansson -l libxml2 -l mc3adll64 -l mc3adll64d -l mc3adv64 -l picxm --coverage -o senderTestApp
    
     - name: move gcno to sender test dir
       run: move *.gcno SenderTest 
