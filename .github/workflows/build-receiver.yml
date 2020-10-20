@@ -1,0 +1,24 @@
+name: running receivr
+
+on:
+
+  push:
+
+    branches: [ master ]
+
+  pull_request:
+
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: windows-2019
+
+    steps:
+
+    - uses: actions/checkout@v2
+    
+    - name : run stor_scp.exe
+      run : .\Receiver\stor_scp.exe
