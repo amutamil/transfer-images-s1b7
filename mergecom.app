@@ -64,18 +64,18 @@
 [MERGE_STORE_SCP]
     PORT_NUMBER     = 104        # port 104 is the standard DICOM port and is
 #                                      privileged
-    HOST_NAME       = localhost  # Put the remote machine name here
+    HOST_NAME       = github.com # Put the remote machine name here
     SERVICE_LIST    = Storage_SCU_Service_List
 
 [MERGE_STORE_SCU]
-    PORT_NUMBER     = 104       # port 104 is the standard DICOM port and is
+    PORT_NUMBER     = 1115       # port 104 is the standard DICOM port and is
 #                                      privileged.  This example has a
 #                                      different port to prevent conflicts when
 #                                      testing both applications on the same
 #                                      machine.  Both the storage commitment
 #                                      SCU and SCP samples listen for
 #                                      associations.
-    HOST_NAME       = localhost  # Put the remote machine name here
+    HOST_NAME       = github.com # Put the remote machine name here
     SERVICE_LIST    = Storage_Commit_SCP_Service_List
 
 [MERGE_MEDIA_FSU]
