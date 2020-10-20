@@ -21,7 +21,7 @@ SAMP_BOOLEAN ImageList::AddFileToList(InstanceNode** A_list, char* A_fname)
 
 	memset(newNode, 0, sizeof(InstanceNode));
 
-	strncpy_s(newNode->fname, A_fname, sizeof(newNode->fname));
+	strncpy(newNode->fname, A_fname, sizeof(newNode->fname));
 	newNode->fname[sizeof(newNode->fname) - 1] = '\0';
 
 	newNode->responseReceived = SAMP_FALSE;
