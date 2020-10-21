@@ -34,13 +34,13 @@
  /*
   * Merge DICOM Toolkit Includes
   */
-#include "mc3media.h"
-#include "mc3msg.h"
-#include "mergecom.h"
-#include "diction.h"
-#include "mc3services.h"
-#include "mc3items.h"
-//#include "mcstatus.h"
+#include "..\mc3inc\mc3media.h"
+#include "..\mc3inc\mc3msg.h"
+#include "..\mc3inc\mergecom.h"
+#include "..\mc3inc\diction.h"
+#include "..\mc3inc\mc3services.h"
+#include "..\mc3inc\mc3items.h"
+//#include "..\mc3inc\mcstatus.h"
 /*
  * Used to identify the format of an object
  */
