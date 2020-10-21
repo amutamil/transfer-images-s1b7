@@ -24,7 +24,7 @@ jobs:
           vs-version: 15.0
     
     - name: subscribe1 build
-      run: msbuild scu.vcxproj /p:configuration=debug /p:platform=x64:
+      run: msbuild scu.vcxproj /p:configuration=debug /p:platform=x64
  
   build-receiver:
     
