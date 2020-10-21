@@ -18,31 +18,28 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       
-    #- name: Add msbuild to PATH
-    #  uses: microsoft/setup-msbuild@v1.0.2 
-     # with:
-      #    vs-version: 15.0
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2 
+      with:
+          vs-version: 15.0
     
     #- name: subscribe1 build
      # run: msbuild scu.vcxproj /p:configuration=debug /p:platform=x64
  
-   # - name: msbuild Project build
-    #  run:  msbuild .\SenderTest1\TransferMedicalimages.vcxproj /p:configuration=debug /p:platform=x64
-    - name : check g++
-      run : g++ --version
-    - name : check gcov
-      run : gcov --version
+    - name: msbuild Project build
+      run:  msbuild .\SenderTest1\TransferMedicalimages.vcxproj /p:configuration=debug /p:platform=x64
+      
     - name: build senderTestApplication
-      run: g++ SenderTest1\*.cpp -I mc3inc -L mc3lib -l jansson -l libxml2 -l mc3adll64 -l mc3adll64d -l mc3adv64 -l picxm --coverage -o senderTestApp
+      run: g++ -S SenderTest1\*.cpp --coverage
     
     - name: move gcno to sender test dir
       run: move *.gcno SenderTest1 
 
     - name: move senderTestApp to mc3lib
-      run: move senderTestApp.exe mc3lib
+      run: copy .SenderTest\x64\debug\TransferMedicalimages.exe  .\mc3lib\
     
     - name: cd into mc3lib to run sender
-      run: cd mc3lib && ./senderTestApp.exe 
+      run: cd mc3lib && ./TransferMedicalimages.exe 
 
     - name: move .gcda files to sender test dir
       run:  move *.gcda SenderTest1
