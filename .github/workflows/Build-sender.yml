@@ -42,17 +42,9 @@ jobs:
       
     - name : run stor_scp.exe
       run : .\Receiver\stor_scp.exe
-
-  build-sender:
-
-    runs-on: windows-2019
-
-    steps:
-
-    - uses: actions/checkout@v2
-    
-    - name : run sender.exe
-      run : .\MC3File\imgt.exe MERGE_STORE_SCP 1 2
+      
+    - name: build senderTestApplication
+      run: g++ -S SenderTest\ImageListTest.cpp --coverage
     
     - name: move gcno to sender test dir
       run: move *.gcno SenderTest 
