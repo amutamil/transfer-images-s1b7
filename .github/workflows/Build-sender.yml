@@ -26,25 +26,22 @@ jobs:
     - name: subscribe1 build
       run: msbuild scu.vcxproj /p:configuration=debug /p:platform=x64
  
-  Coverage:
-    
-    runs-on: windows-2019
-    
-    steps:
+    - name: msbuild Project build
+      run:  msbuild .\SenderTest1\TransferMedicalimages.vcxproj /p:configuration=debug /p:platform=x64
   
     - uses: actions/checkout@v2
       
     - name: build senderTestApplication
-      run: g++ SenderTest\ImageListTest.cpp -I mc3inc -L mc3lib -l jansson -l libxml2 -l mc3adll64 -l mc3adll64d -l mc3adv64 -l picxm --coverage -o senderTestApp
+      run: g++ -S SenderTest\ImageListTest.cpp --coverage
     
     - name: move gcno to sender test dir
       run: move *.gcno SenderTest 
 
     - name: move senderTestApp to mc3lib
-      run: move senderTestApp.exe mc3lib
+      run:  copy .\SenderTest1\x64\debug\TransferMedicalimages.exe .\mc3lib
     
-    - name: cd into mc3lib to run sender
-      run: cd mc3lib && ./senderTestApp.exe 
+    - name: run sender Test
+      run: .\mc3lib\senderTestApp.exe 
 
     - name: move .gcda files to sender test dir
       run:  move *.gcda SenderTest
