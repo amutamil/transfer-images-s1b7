@@ -12,8 +12,13 @@ on:
 
 jobs:
   build-receiver:
+    
     runs-on: windows-2019
+    
     steps:
+  
+    - uses: actions/checkout@v2
+      
     - name : run stor_scp.exe
       run : .\Receiver\stor_scp.exe
 
