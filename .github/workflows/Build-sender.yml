@@ -28,7 +28,10 @@ jobs:
  
    # - name: msbuild Project build
     #  run:  msbuild .\SenderTest1\TransferMedicalimages.vcxproj /p:configuration=debug /p:platform=x64
-  
+    - name : check g++
+      run : g++ --version
+    - name : check gcov
+      run : gcov --version
     - name: build senderTestApplication
       run: g++ SenderTest1\*.cpp -I mc3inc -L mc3lib -l jansson -l libxml2 -l mc3adll64 -l mc3adll64d -l mc3adv64 -l picxm --coverage -o senderTestApp
     
