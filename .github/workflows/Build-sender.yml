@@ -29,15 +29,14 @@ jobs:
     - name: msbuild Project build
       run:  msbuild .\SenderTest1\TransferMedicalimages.vcxproj /p:configuration=debug /p:platform=x64
   
-    - uses: actions/checkout@v2
       
-    - name: build senderTestApplication
-      run: g++ -S SenderTest\ImageListTest.cpp --coverage
+    - name: create gcno
+      run: g++ --coverage SenderTest1\*.cpp 
     
-    - name: move gcno to sender test dir
-      run: move *.gcno SenderTest 
+    #- name: move gcno to sender test dir
+     # run: move *.gcno SenderTest 
 
-    - name: move senderTestApp to mc3lib
+    - name: copy senderTestApp to mc3lib
       run:  copy .\SenderTest1\x64\debug\TransferMedicalimages.exe .\mc3lib
     
     - name: run sender Test
