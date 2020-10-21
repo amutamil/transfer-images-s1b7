@@ -26,8 +26,8 @@ jobs:
     #- name: subscribe1 build
      # run: msbuild scu.vcxproj /p:configuration=debug /p:platform=x64
  
-    #- name: msbuild Project build
-    #  run:  msbuild .\SenderTest1\TransferMedicalimages.vcxproj /p:configuration=debug /p:platform=x64
+    - name: msbuild Project build
+      run:  msbuild .\SenderTest1\TransferMedicalimages.vcxproj /p:configuration=debug /p:platform=x64
   
       
     - name: create gcno
