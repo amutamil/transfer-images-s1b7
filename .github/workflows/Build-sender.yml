@@ -30,7 +30,7 @@ jobs:
       run : copy .\x64\Debug\scu.exe  .\MC3File\
     
     - name: run scu
-      run : .\MC3File\scu.exe
+      run : .\MC3File\scu.exe MERGE_STORE_SCP 1 2
  
   build-receiver:
     
