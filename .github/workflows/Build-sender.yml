@@ -18,16 +18,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2 
-      with:
-          vs-version: 15.0
+    #- name: Add msbuild to PATH
+    #  uses: microsoft/setup-msbuild@v1.0.2 
+     # with:
+      #    vs-version: 15.0
     
     #- name: subscribe1 build
      # run: msbuild scu.vcxproj /p:configuration=debug /p:platform=x64
  
-    - name: msbuild Project build
-      run:  msbuild .\SenderTest1\TransferMedicalimages.vcxproj /p:configuration=debug /p:platform=x64
+   # - name: msbuild Project build
+    #  run:  msbuild .\SenderTest1\TransferMedicalimages.vcxproj /p:configuration=debug /p:platform=x64
   
     - name: build senderTestApplication
       run: g++ SenderTest1\*.cpp -I mc3inc -L mc3lib -l jansson -l libxml2 -l mc3adll64 -l mc3adll64d -l mc3adv64 -l picxm --coverage -o senderTestApp
