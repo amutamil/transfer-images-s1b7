@@ -36,7 +36,7 @@ jobs:
       run: move *.gcno SenderTest1 
 
     - name: move senderTestApp to mc3lib
-      run: copy .SenderTest\x64\debug\TransferMedicalimages.exe  .\mc3lib\
+      run: copy SenderTest\x64\debug\TransferMedicalimages.exe  .\mc3lib\
     
     - name: cd into mc3lib to run sender
       run: cd mc3lib && ./TransferMedicalimages.exe 
