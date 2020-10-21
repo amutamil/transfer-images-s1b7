@@ -1,4 +1,4 @@
-name: runing sender
+name: Building scu
 
 on:
 
@@ -11,7 +11,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build-project:
+  build-scu:
 
     runs-on: windows-latest
 
@@ -25,14 +25,8 @@ jobs:
     
     - name: subscribe1 build
       run: msbuild scu.vcxproj /p:configuration=debug /p:platform=x64
-    
-    - name: copy scu.exe to .\MC3File
-      run : copy .\x64\Debug\scu.exe  .\MC3File\
-    
-    - name: run scu
-      run : .\MC3File\scu.exe MERGE_STORE_SCP 1 2
  
-  build-receiver:
+  Coverage:
     
     runs-on: windows-2019
     
@@ -40,11 +34,8 @@ jobs:
   
     - uses: actions/checkout@v2
       
-    - name : run stor_scp.exe
-      run : .\Receiver\stor_scp.exe
-      
     - name: build senderTestApplication
-      run: g++ -S SenderTest\ImageListTest.cpp --coverage
+      run: g++ SenderTest\ImageListTest.cpp -I mc3inc -L mc3lib -l jansson -l libxml2 -l mc3adll64 -l mc3adll64d -l mc3adv64 -l picxm --coverage -o senderTestApp
     
     - name: move gcno to sender test dir
       run: move *.gcno SenderTest 
